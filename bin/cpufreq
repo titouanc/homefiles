@@ -1,9 +1,0 @@
-#!/bin/bash
-
-printf "\033[1m\tmin\t max\t cur\033[0m\n"
-for cpu in /sys/devices/system/cpu/cpu[0-9]*; do
-	min=$(cat $cpu/cpufreq/cpuinfo_min_freq)
-	max=$(cat $cpu/cpufreq/cpuinfo_max_freq)
-	cur=$(sudo cat $cpu/cpufreq/cpuinfo_cur_freq)
-	printf "\033[1m%s\033[0m\t%s\t%s\t%s\tMHz\n" ${cpu##*/} $((min / 1000)) $((max/1000)) $((cur/1000))
-done
