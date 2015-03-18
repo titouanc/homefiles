@@ -9,4 +9,5 @@ b1=$(( $(( $hashed & 0x038 )) >> 3 ))
 b2=$(( $(( $hashed & 0x1c0 )) >> 6 ))
 b3=$(( $(( $hashed & 0xe00 )) >> 9 ))
 
-printf "\033[1;4%d;3%dm-\033[4%d;3%dm-\033[0m" $b0 $b1 $b2 $b3
+char=' '
+printf "\033[1;4%dm$char\033[4%dm$char\033[4%dm$char\033[4%dm$char\033[0m" $b0 $b1 $b2 $b3
