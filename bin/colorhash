@@ -1,0 +1,12 @@
+#!/bin/bash
+
+[[ -z $1 ]] && str="$USER@$HOSTNAME" || str="$1"
+
+hashed=0x$(echo $str | md5sum | head -c 3)
+
+b0=$(( $hashed & 0x007 ))
+b1=$(( $(( $hashed & 0x038 )) >> 3 ))
+b2=$(( $(( $hashed & 0x1c0 )) >> 6 ))
+b3=$(( $(( $hashed & 0xe00 )) >> 9 ))
+
+printf "\033[1;4%d;3%dm-\033[4%d;3%dm-\033[0m" $b0 $b1 $b2 $b3
