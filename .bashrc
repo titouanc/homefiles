@@ -11,7 +11,7 @@ PS1='\
 \[\033[0m\] \
 '
 
-PS1="|$($HOME/bin/colorhash)| $PS1"
+PS1="|$($HOME/bin/colorhash)|$PS1"
 
 # ls shortcuts
 alias ls='ls --color'
