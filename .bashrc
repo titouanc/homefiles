@@ -19,6 +19,7 @@ alias grep='grep -n --color'
 alias ll='ls -l'
 alias lll='tree'
 alias la='ls -lA'
+alias urlab-ssh='ssh -t azog.urlab.be ssh'
 
 # my bins
 export PATH=$HOME/bin:/usr/local/bin:$PATH
