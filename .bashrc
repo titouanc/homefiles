@@ -34,5 +34,5 @@ today() { egrep -h "$(date +"%m/%d|%b* %d")" /usr/share/calendar/*; }
 if [[ $STY == "" ]]; then
 	PS1=$PS1
 else
-	PS1="\033[1m{SCR}\033[0m $PS1"
+	PS1="\[\033[1m{SCR}\[\033[0m $PS1"
 fi
