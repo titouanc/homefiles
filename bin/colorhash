@@ -1,8 +1,10 @@
 #!/bin/bash
 
+hashfunc="md5sum"
+[[ -z $(which $hashfunc) ]] && hashfunc=md5
 [[ -z $1 ]] && str="$USER@$HOSTNAME" || str="$1"
 
-hashed=0x$(echo $str | md5sum | head -c 3)
+hashed=0x$(echo $str | $hashfunc | head -c 3)
 
 b0=$(( $hashed & 0x007 ))
 b1=$(( $(( $hashed & 0x038 )) >> 3 ))
