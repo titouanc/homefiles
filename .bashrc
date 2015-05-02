@@ -36,3 +36,5 @@ if [[ $STY == "" ]]; then
 else
 	PS1="\[\033[1m{SCR}\[\033[0m $PS1"
 fi
+
+[[ -f ~/.local_bashrc ]] && source ~/.local_bashrc
