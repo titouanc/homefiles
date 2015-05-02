@@ -1,0 +1,49 @@
+#!/bin/bash
+
+if [[ "$#" == "0" ]]; then
+    echo "USAGE: $(basename $0) PROJECT_PATH [ PROJECT_NAME ]"
+    echo " * Create a minimal distributable Python package structure"
+    echo " * Install pytest and plugins, basic configuration"
+    exit 
+fi
+
+proj="$1"
+name="$2"
+
+[[ "$2" == "" ]] && name="$(basename "$proj")"
+
+set -v
+mkdir -p "$proj"
+cd $proj
+
+mkdir -p bin "$name" tests
+touch tests/__init__.py "$name/__init__.py"
+
+echo -e "pytest\npytest-flakes\npytest-cov\npytest-pep8\n" >> requirements.txt
+echo -e "[pytest]\naddopts = --flakes --cov $name --pep8\nnorecursedirs = .git ve" >> pytest.ini
+echo -e "*.pyc\n.coverage\n.cache\n__pycache__\nbuild\ndist\n*.egg-info" >> .gitignore
+
+echo -e "from setuptools import setup
+
+setup(
+    name='$name',
+    version='0.1',
+    description='',
+    url='',
+    author='$(whoami)',
+    author_email='',
+    license='Beerware',
+    packages=['$name'],
+
+    # Put package dependencies here (list of strings)
+    install_requires=[],
+    zip_safe=False,
+
+    # Put here command line scripts (usually located in bin/; list of strings)
+    scripts=[],
+)
+" >> setup.py
+
+virtualenv --distribute ve
+source ve/bin/activate
+pip install -r requirements.txt
