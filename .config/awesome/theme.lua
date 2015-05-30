@@ -4,7 +4,7 @@
 
 theme = {}
 
-theme.font          = "sans 8"
+theme.font          = "sans 9"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
@@ -74,7 +74,7 @@ theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/defau
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- You can use your own command to set your wallpaper
-theme.wallpaper_cmd = { "awsetbg /usr/share/awesome/themes/default/background.png" }
+theme.wallpaper = { os.getenv("HOME") .. "/.config/awesome/wallpaper.png" }
 
 -- You can use your own layout icons like this:
 icons = os.getenv("HOME") .. "/.config/awesome/icons/"
@@ -90,6 +90,9 @@ theme.layout_tile = icons .. "tile.png"
 theme.layout_tiletop = icons .. "tiletop.png"
 theme.layout_spiral  = icons .. "spiral.png"
 theme.layout_dwindle = icons .. "dwindle.png"
+
+theme.cpu_icon = icons .. "cpu.png"
+theme.mem_icon = icons .. "mem.png"
 
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 

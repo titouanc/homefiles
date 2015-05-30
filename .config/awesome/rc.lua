@@ -38,7 +38,6 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme.lua")
 
@@ -59,45 +58,32 @@ layouts =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
-    --awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
     awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
-    --awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
--- }}}
 
--- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {}
+tags = {
+    names = { "#", 2, 3, 4, "w", 6, 7, 8, "@" },
+    layout = {layouts[2], layouts[2], layouts[2], layouts[2], layouts[1], layouts[2], layouts[2], layouts[2], layouts[6]}
+}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "#", 2, 3, 4, "w", 6, 7, 8, "@" }, s, layouts[1])
+    tags[s] = awful.tag(tags.names, s, tags.layout)
 end
--- }}}
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
-myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+myawesomemenu = awful.menu({ items = {
+   { "Restart", awesome.restart, beautiful.awesome_icon },
+   { "Quit", awesome.quit, beautiful.awesome_icon }
+}})
 
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
-                                     menu = mymainmenu })
+                                     menu = myawesomemenu })
 -- }}}
 
 -- {{{ Wibox
@@ -109,11 +95,19 @@ mysystray = widget({ type = "systray" })
 
 
 -- Monitoring widgets
+memicon = widget({ type = "imagebox" })
+memicon.image = image(theme.mem_icon)
 memwidget = widget({ type = "textbox" })
-vicious.register(memwidget, vicious.widgets.mem, "$2MB", 13)
-cpuwidget = widget({ type = "textbox" })
-vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
+vicious.register(memwidget, vicious.widgets.mem, '<span color="yellow">$2MB</span>', 13)
 
+cpuicon = widget({ type = "imagebox" })
+cpuicon.image = image(theme.cpu_icon)
+cpuwidget = widget({ type = "textbox" })
+vicious.register(cpuwidget, vicious.widgets.cpu, '<span color="red">$1%</span>')
+
+
+spacer = widget({ type = "textbox" })
+spacer.text = " | "
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -131,7 +125,6 @@ for s = 1, screen.count() do
                            awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
                            awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
-
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
     -- Add widgets to the wibox - order matters
@@ -143,9 +136,14 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,
+        spacer,
         s == 1 and mysystray or nil,
-		memwidget,
-		cpuwiget,
+        spacer,
+        memicon,
+        memwidget,
+        spacer,
+        cpuicon,
+        cpuwiget,
         layout = awful.widget.layout.horizontal.rightleft
     }
 end
@@ -153,7 +151,6 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -164,7 +161,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
-
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
