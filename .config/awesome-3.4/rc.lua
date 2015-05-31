@@ -143,7 +143,7 @@ for s = 1, screen.count() do
         memwidget,
         spacer,
         cpuicon,
-        cpuwiget,
+        cpuwidget,
         layout = awful.widget.layout.horizontal.rightleft
     }
 end
