@@ -13,6 +13,8 @@ require("debian.menu")
 -- Vicious widget lib
 require("vicious")
 
+require("utils")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -98,12 +100,17 @@ mysystray = widget({ type = "systray" })
 memicon = widget({ type = "imagebox" })
 memicon.image = image(theme.mem_icon)
 memwidget = widget({ type = "textbox" })
-vicious.register(memwidget, vicious.widgets.mem, '<span color="yellow">$2MB</span>', 13)
+vicious.register(memwidget, vicious.widgets.mem, '<span color="yellow">$2 Mo</span>', 13)
 
+cpu_pc = cpu_percent()
 cpuicon = widget({ type = "imagebox" })
 cpuicon.image = image(theme.cpu_icon)
 cpuwidget = widget({ type = "textbox" })
-vicious.register(cpuwidget, vicious.widgets.cpu, '<span color="red">$1%</span>')
+mytimer = timer({ timeout = 2 })
+mytimer:add_signal("timeout", function() 
+  cpuwidget.text = string.format('<span color="#d42f69">%3d%% (%s)</span>', cpu_pc(), load_avg())
+end)
+mytimer:start()
 
 
 spacer = widget({ type = "textbox" })
