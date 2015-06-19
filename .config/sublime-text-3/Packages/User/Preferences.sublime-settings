@@ -1,0 +1,10 @@
+{
+	"font_size": 13,
+	"rulers": [80, 120],
+	"always_show_minimap_viewport": true,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"bold_folder_labels": true,
+	"show_encoding": true,
+    "show_line_endings": true
+}
