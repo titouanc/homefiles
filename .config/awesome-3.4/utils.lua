@@ -1,3 +1,4 @@
+-- cpu_percent() -> f() -> cpu usage %
 function cpu_percent()
   local last_busy, last_idle = 0, 0
 
@@ -19,6 +20,7 @@ function cpu_percent()
   return res
 end
 
+-- cpu_percent() -> f() -> "load1 load5 load15"
 function load_avg()
   for line in io.lines("/proc/loadavg") do
     local match = string.match(line, "(%d+.%d+ +%d+.%d+ +%d+.%d+)")
