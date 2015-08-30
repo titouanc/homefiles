@@ -11,5 +11,6 @@
 		120
 	],
 	"show_encoding": true,
-	"show_line_endings": true
+	"show_line_endings": true,
+	"translate_tabs_to_spaces": true
 }
