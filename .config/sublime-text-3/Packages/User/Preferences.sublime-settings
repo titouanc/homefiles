@@ -1,10 +1,15 @@
 {
-	"font_size": 13,
-	"rulers": [80, 120],
 	"always_show_minimap_viewport": true,
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/User/SublimeLinter/Monokai (Flake8Lint) (SL).tmTheme",
+	"font_size": 13,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
-	"bold_folder_labels": true,
+	"rulers":
+	[
+		80,
+		120
+	],
 	"show_encoding": true,
-    "show_line_endings": true
+	"show_line_endings": true
 }
