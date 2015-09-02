@@ -8,3 +8,8 @@ alias ls "ls --color"
 alias ll "ls -l"
 alias la "ll -A"
 alias lll "tree -C"
+
+# grc (colorize command output)
+alias ps "grc ps"
+alias mount "grc mount"
+alias netstat "grc netstat"
