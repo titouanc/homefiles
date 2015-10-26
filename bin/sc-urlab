@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+    echo "USAGE: $0 SOUNDCLOUD URL"
+    exit 1
+fi
+
+ssh snips.lan "mpc load soundcloud://url/$1"

@@ -13,3 +13,9 @@ alias lll "tree -C"
 alias ps "grc ps"
 alias mount "grc mount"
 alias netstat "grc netstat"
+
+function cpu-hard-limit
+    for i in (seq 0 7)
+        sudo cpufreq-set -c $i -u 800000
+    end
+end
