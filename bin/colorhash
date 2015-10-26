@@ -12,4 +12,4 @@ b2=$(( $(( $hashed & 0x1c0 )) >> 6 ))
 b3=$(( $(( $hashed & 0xe00 )) >> 9 ))
 
 char=' '
-printf "\[\033[1;4%dm\]$char\[\033[4%dm\]$char\[\033[4%dm\]$char\[\033[4%dm\]$char\[\033[0m\]\n" $b0 $b1 $b2 $b3
+printf "\033[1;4%dm$char\033[4%dm$char\033[4%dm$char\033[4%dm$char\033[0m\n" $b0 $b1 $b2 $b3

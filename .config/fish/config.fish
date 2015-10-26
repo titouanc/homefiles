@@ -1,3 +1,5 @@
+export PATH=$HOME/bin:$PATH
+
 # Prompt
 set theme_display_git_untracked no
 . $functions/fish_prompt.fish
