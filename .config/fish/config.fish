@@ -1,4 +1,4 @@
-export PATH=$HOME/bin:$PATH
+set -U fish_user_paths ~/bin
 
 # Prompt
 set theme_display_git_untracked no
