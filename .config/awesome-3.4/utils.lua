@@ -1,3 +1,11 @@
+-- remove trailing and leading whitespace from string.
+-- http://en.wikipedia.org/wiki/Trim_(8programming)
+function trim(s)
+  -- from PiL2 20.4
+  return (s:gsub("^%s*(.-)%s*$", "%1"))
+end
+
+
 -- cpu_percent() -> f() -> cpu usage %
 function cpu_percent()
   local last_busy, last_idle = 0, 0
@@ -28,4 +36,29 @@ function load_avg()
       return match
     end
   end
+end
+
+function bat_status()
+  local now, full
+
+  for line in io.lines("/sys/class/power_supply/BAT0/charge_now") do
+    now = tonumber(trim(line))
+    break
+  end
+
+  for line in io.lines("/sys/class/power_supply/BAT0/charge_full") do
+    full = tonumber(trim(line))
+    break
+  end
+
+  return 100*now/full
+end
+
+function ac_plugged()
+  for line in io.lines("/sys/class/power_supply/AC/online") do
+    if trim(line) == "1" then
+      return true
+    end
+  end
+  return false
 end

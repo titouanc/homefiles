@@ -106,9 +106,25 @@ cpu_pc = cpu_percent()
 cpuicon = widget({ type = "imagebox" })
 cpuicon.image = image(theme.cpu_icon)
 cpuwidget = widget({ type = "textbox" })
+cpuwidget.text = string.format('<span color="#d42f69">%3d%% (%s)</span>', cpu_pc(), load_avg())
+
+local ac_was_plugged = ac_plugged()
+baticon = widget({ type = "imagebox" })
+baticon.image = image(theme.bat_icon)
+batwidget = widget({ type = "textbox" })
+batwidget.text = string.format('<span color="#db842f">%3d%%</span>', bat_status())
+
 mytimer = timer({ timeout = 2 })
 mytimer:add_signal("timeout", function() 
   cpuwidget.text = string.format('<span color="#d42f69">%3d%% (%s)</span>', cpu_pc(), load_avg())
+  batwidget.text = string.format('<span color="#db842f">%3d%%</span>', bat_status())
+  if ac_plugged() and not ac_was_plugged then
+    baticon.image = image(theme.ac_icon)
+    ac_was_plugged = true
+  elseif not ac_plugged() and ac_was_plugged then
+    baticon.image = image(theme.bat_icon)
+    ac_was_plugged = false
+  end
 end)
 mytimer:start()
 
@@ -163,6 +179,9 @@ for s = 1, screen.count() do
         spacer,
         cpuicon,
         cpuwidget,
+        spacer,
+        baticon,
+        batwidget,
         layout = awful.widget.layout.horizontal.rightleft
     }
 end

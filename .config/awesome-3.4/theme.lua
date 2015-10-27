@@ -93,6 +93,8 @@ theme.layout_dwindle = icons .. "dwindle.png"
 
 theme.cpu_icon = icons .. "cpu.png"
 theme.mem_icon = icons .. "mem.png"
+theme.bat_icon = icons .. "bat.png"
+theme.ac_icon = icons .. "ac.png"
 
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 
