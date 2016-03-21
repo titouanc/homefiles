@@ -1,4 +1,5 @@
 #!/bin/bash
 
 name="$(md5sum "$1" | cut -d ' ' -f 1).${1##*.}"
-scp -q $1 picz@ititou.be:$name && echo http://picz.ititou.be/$name
+url="http://picz.ititou.be/$name"
+scp -q $1 picz@ititou.be:$name && echo $url && echo $url | xclip
