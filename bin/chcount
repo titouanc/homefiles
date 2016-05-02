@@ -1,0 +1,14 @@
+#!/usr/bin/env python2
+
+from sys import stdin
+
+r = {}
+s = stdin.read()
+
+while s:
+    for c in s:
+        r[c] = r.get(c, 0) + 1
+    s = stdin.read()
+
+for k in sorted(r.keys()):
+    print str(k), r[k]    
