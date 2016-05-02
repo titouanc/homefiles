@@ -2,4 +2,4 @@
 
 name="$(md5sum "$1" | cut -d ' ' -f 1).${1##*.}"
 url="http://picz.ititou.be/$name"
-scp -q $1 picz@ititou.be:$name && echo $url && echo $url | xclip
+scp -q "$1" picz@ititou.be:$name && echo $url && echo $url | xclip
