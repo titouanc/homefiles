@@ -17,5 +17,6 @@
 	],
 	"show_encoding": true,
 	"show_line_endings": true,
-	"translate_tabs_to_spaces": true
+	"translate_tabs_to_spaces": true,
+	"copy_with_empty_selection": false
 }
