@@ -1,0 +1,4 @@
+#!/bin/bash
+
+urlab-ssh delight -t 'sudo systemctl restart lechbot'
+

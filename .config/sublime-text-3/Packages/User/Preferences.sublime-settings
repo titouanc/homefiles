@@ -3,7 +3,8 @@
 	"atomic_save": true,
 	"bold_folder_labels": true,
 	"color_scheme": "Packages/User/SublimeLinter/Monokai (Flake8Lint) (SL).tmTheme",
-	"font_size": 13,
+	"copy_with_empty_selection": false,
+	"font_size": 10,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
@@ -17,6 +18,5 @@
 	],
 	"show_encoding": true,
 	"show_line_endings": true,
-	"translate_tabs_to_spaces": true,
-	"copy_with_empty_selection": false
+	"translate_tabs_to_spaces": true
 }
