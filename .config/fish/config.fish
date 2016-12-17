@@ -1,4 +1,5 @@
 set -U fish_user_paths ~/bin
+set -U fish_user_paths ~/.local/bin
 set -U fish_user_paths ~/.cabal/bin
 
 # Prompt
