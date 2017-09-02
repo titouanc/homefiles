@@ -45,7 +45,7 @@ function fish_prompt
   set -l hourstr "[$hour]"
   set -l host (command hostname)
   set -l userhost "$green$USER$normal@$cyan$host:"
-  set -l colorz (eval $HOME/bin/colorhash)
+  set -l colorz (eval $HOME/bin/colorhash "$USER@$host")
 
   echo -n -s "|$colorz|$userhost$cwd$git_info$normal$hourstr "
 end

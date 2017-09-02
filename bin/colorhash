@@ -1,15 +1,91 @@
 #!/bin/bash
+#
+# Titouan Christophe <moiandme@gmail.com>
+# 
+# Hash some text and convert the output to ANSI terminal colors (3 bits)
+# 
+# Hash bits :: |0 1 2 3 4 5 6 7|0 1 2 3 4 5 6 7|0 1 2 3 4 5 6 7|
+# Hash color:: |r g b|r g b|r g b|r g b|r g b|r g b|r g b|r g b|
+#
 
+# Defaults
 hashfunc="md5sum"
-[[ -z $(which $hashfunc) ]] && hashfunc=md5
-[[ -z $1 ]] && str="$USER@$HOSTNAME" || str="$1"
+sh_mode=""
+n=4
 
-hashed=0x$(echo $str | $hashfunc | head -c 3)
+# Some distros use the command md5 rather than md5sum
+[[ -z $(which md5sum) ]] && hashfunc=md5
 
-b0=$(( $hashed & 0x007 ))
-b1=$(( $(( $hashed & 0x038 )) >> 3 ))
-b2=$(( $(( $hashed & 0x1c0 )) >> 6 ))
-b3=$(( $(( $hashed & 0xe00 )) >> 9 ))
 
-char=' '
-printf "\033[1;4%dm$char\033[4%dm$char\033[4%dm$char\033[4%dm$char\033[0m\n" $b0 $b1 $b2 $b3
+# Parse options
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help)
+            echo "USAGE: $0 [ --bash ] [ -n NUMBER ] [ --hashfunc COMMAND ] [ text ]"
+            echo "Options:"
+            echo "  -s, --sh, --bash:"
+            echo "      Escape color code for use in prompt variables (like \$PS1)"
+            echo "  -n NUMBER, --number NUMBER:"
+            echo "      Print NUMBER first colors (default: n=$n)"
+            echo "  -h COMMAND, --hash-func COMMAND:"
+            echo "      Specifiy hash function to use (default: $hashfunc)"
+            exit
+            ;;
+        -s|--sh|--bash)
+            sh_mode="sh"
+            ;;
+        -n|--number)
+            shift
+            [[ -z "$1" ]] && echo "Missing number of colors with -n" && exit 1
+            n=$(( $1 ))  # Ensure number
+            ;;
+        -h|--hash-func)
+            shift
+            [[ -z "$1" ]] && echo "Missing hash function with -h" && exit 1
+            hashfunc=$1
+            ;;
+        *)
+            break
+    esac
+    shift
+done
+
+# Get text to hash from remaining arguments
+text_to_hash="$*"
+
+# If no text given, get from stdin
+[[ -z "$text_to_hash" ]] && text_to_hash=$(cat)
+
+# Hash it !
+hashed=$(echo $text_to_hash | $hashfunc)
+
+colorcode () {
+    [[ -z "$sh_mode" ]] || echo -ne '\['
+    echo -ne '\033['
+    echo -ne $1
+    echo -ne m
+    [[ -z "$sh_mode" ]] || echo -ne '\]'
+}
+
+# Print it !
+while [[ $n -gt 0 ]]; do
+    [[ -z "$hashed" ]] && break
+
+    # Shift 3 first nibbles (which will give 4 colors)
+    x=0x$(echo $hashed | head -c 3)
+    hashed=$(echo $hashed | tail -c +3)
+
+    # Then output at most 4 colors
+    for i in $(seq 4); do
+        [[ $n -gt 0 ]] || break
+        color=$(( $x & 0x007 ))
+        x=$(( $x >> 3 ))
+        n=$(( $n - 1 ))
+        colorcode 4$color
+        echo -ne " "
+    done
+done
+
+# Final newline
+colorcode 0
+echo
