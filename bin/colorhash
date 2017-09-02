@@ -39,7 +39,7 @@ while [[ $# -gt 0 ]]; do
             [[ -z "$1" ]] && echo "Missing number of colors with -n" && exit 1
             n=$(( $1 ))  # Ensure number
             ;;
-        -h|--hash-func)
+        -H|--hash-func)
             shift
             [[ -z "$1" ]] && echo "Missing hash function with -h" && exit 1
             hashfunc=$1
