@@ -23,11 +23,12 @@ while [[ $# -gt 0 ]]; do
         -h|--help)
             echo "USAGE: $0 [ --bash ] [ -n NUMBER ] [ --hashfunc COMMAND ] [ text ]"
             echo "Options:"
+            echo "  -h, --help: This help"
             echo "  -s, --sh, --bash:"
             echo "      Escape color code for use in prompt variables (like \$PS1)"
             echo "  -n NUMBER, --number NUMBER:"
             echo "      Print NUMBER first colors (default: n=$n)"
-            echo "  -h COMMAND, --hash-func COMMAND:"
+            echo "  -H COMMAND, --hash-func COMMAND:"
             echo "      Specifiy hash function to use (default: $hashfunc)"
             exit
             ;;
@@ -41,7 +42,7 @@ while [[ $# -gt 0 ]]; do
             ;;
         -H|--hash-func)
             shift
-            [[ -z "$1" ]] && echo "Missing hash function with -h" && exit 1
+            [[ -z "$1" ]] && echo "Missing hash function with -H" && exit 1
             hashfunc=$1
             ;;
         *)
