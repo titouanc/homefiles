@@ -9,7 +9,7 @@ def get_grades(netid, password):
     s.post("https://student.cumulus.vub.ac.be/psp/CALIPROD/EMPLOYEE/HRMS/?cmd=login&languageCd=ENG", data={'timezonOffset': -120, 'userid': netid, 'pwd': password})
     r = s.get("https://student.cumulus.vub.ac.be/psc/CALIPROD/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSR_SSENRL_GRADE.GBL?Page=SSR_SSENRL_GRADE&Action=A&TargetFrameName=None")
 
-    soup = BeautifulSoup(r.content)
+    soup = BeautifulSoup(r.content, "html.parser")
     table = soup.select('.PSLEVEL1GRID')[0]
     lines = table.select('tr')
     heading = [x.text for x in lines[0].select('th')]
