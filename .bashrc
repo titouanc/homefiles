@@ -1,3 +1,10 @@
+is_interactive=$(echo $- | grep i)
+[[ -z "$is_interactive" ]] && return
+
+if command -v fish 2>/dev/null; then
+    [[ -z "$FORCE_BASH" ]] && exec fish
+fi
+
 eval "`dircolors -b`"
 
 PS1='\
