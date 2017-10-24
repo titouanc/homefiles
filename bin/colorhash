@@ -58,7 +58,7 @@ text_to_hash="$*"
 [[ -z "$text_to_hash" ]] && text_to_hash=$(cat)
 
 # Hash it !
-hashed=$(echo $text_to_hash | $hashfunc)
+hashed=$(echo $text_to_hash | $hashfunc | cut -d ' ' -f 1)
 
 colorcode () {
     [[ -z "$sh_mode" ]] || echo -ne '\['

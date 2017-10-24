@@ -4,7 +4,8 @@
 	co = checkout
 	ci = commit
 	st = status
-	br = branch
+    stu = status -uno
+    br = branch
 	hist = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	up = remote update --prune
 [push]
