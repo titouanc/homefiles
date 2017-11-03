@@ -1,6 +1,7 @@
 {
 	"extensions":
 	[
-		"Procfile"
+		"Procfile",
+		"sls"
 	]
 }
