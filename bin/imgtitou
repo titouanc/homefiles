@@ -1,5 +1,11 @@
 #!/bin/bash
 
-name="$(md5sum "$1" | cut -d ' ' -f 1).${1##*.}"
-url="http://picz.ititou.be/$name"
+# Compute 
+hash="$(md5sum "$1" | cut -d ' ' -f 1)"
+extension="${1#*.}"
+
+name="$hash.$extension"
+url="http://mypi.cz/$name"
+
 scp -q "$1" picz@ititou.be:$name && echo $url && echo $url | xclip
+
