@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Compute 
-hash="$(md5sum "$1" | cut -d ' ' -f 1)"
-extension="${1#*.}"
+hash="$(md5sum < "$1" | cut -d ' ' -f 1)"
+name=$(basename "$1")
+extension="${name#*.}"
 
 name="$hash.$extension"
 url="https://mypi.cz/$name"
