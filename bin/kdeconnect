@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -v
+
+sudo iptables -I INPUT 1 -p udp --dport 1714:1764 -j ACCEPT
+sudo iptables -I INPUT 1 -p tcp --dport 1714:1764 -j ACCEPT
+kdeconnect-indicator &
