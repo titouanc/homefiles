@@ -1,5 +1,5 @@
 # Common PATHs to add
-for p in "~/bin" "~/.cabal/bin" "~/.local/bin"
+for p in "$HOME/bin" "$HOME/.local/bin"
     if test -d "$p"
         echo add $p to PATH
         set -U fish_user_paths $p
