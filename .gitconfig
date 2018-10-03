@@ -2,7 +2,7 @@
 	ui = true
 [alias]
 	co = checkout
-	ci = commit
+	ci = commit -S
 	st = status
     stu = status -uno
     br = branch
