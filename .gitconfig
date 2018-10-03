@@ -6,7 +6,7 @@
 	st = status
     stu = status -uno
     br = branch
-	hist = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	hist = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an %C(magenta)%G?%C(blue)>%Creset' --abbrev-commit
 	up = remote update --prune
 [push]
 	default = simple
