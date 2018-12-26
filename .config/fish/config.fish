@@ -1,7 +1,7 @@
 # Common PATHs to add
 for p in "$HOME/bin" "$HOME/.local/bin" "$HOME/.cargo/bin"
     if test -d "$p"
-        set -U fish_user_paths $fish_user_paths $p
+        set fish_user_paths $fish_user_paths $p
     end
 end
 
