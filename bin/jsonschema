@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import sys
+import json
+import jsonschema
+
+if len(sys.argv) < 3:
+    print("USAGE: %s SCHEMA FILE [ FILE ... ]" % sys.argv[0])
+    exit()
+
+schema = json.load(open(sys.argv[1]))
+for f in sys.argv[2:]:
+    jsonschema.validate(schema=schema, instance=json.load(open(f)))
