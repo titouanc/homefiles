@@ -8,5 +8,5 @@ extension="${name#*.}"
 name="$hash.$extension"
 url="https://mypi.cz/$name"
 
-scp -q "$1" picz@ititou.be:$name && echo $url && echo $url | xclip
+scp -q "$1" picz@ititou.be:$name && echo $url && echo -n $url | xclip
 
