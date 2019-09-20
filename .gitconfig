@@ -1,12 +1,13 @@
 [color]
-	ui = true
+    ui = true
 [alias]
-	co = checkout
-	ci = commit -S
-	st = status
+    co = checkout
+    ci = commit -Ss
+    uci = commit --no-gpg-sign
+    st = status
     stu = status -uno
     br = branch
-	hist = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an %C(magenta)%G?%C(blue)>%Creset' --abbrev-commit
-	up = remote update --prune
+    hist = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an %C(magenta)%G?%C(blue)>%Creset' --abbrev-commit
+    up = remote update --prune
 [push]
-	default = simple
+    default = simple

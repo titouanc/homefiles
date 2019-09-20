@@ -2,8 +2,8 @@
 	"always_show_minimap_viewport": true,
 	"atomic_save": true,
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/User/SublimeLinter/Monokai (Flake8Lint) (SL).tmTheme",
 	"copy_with_empty_selection": false,
+	"draw_minimap_border": true,
 	"file_exclude_patterns":
 	[
 		"*.x86",
@@ -44,9 +44,10 @@
 	[
 		"subpixel_antialias"
 	],
-	"font_size": 13,
+	"font_size": 12,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
+	"hot_exit": false,
 	"ignored_packages":
 	[
 		"Vintage"

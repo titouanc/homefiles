@@ -151,16 +151,17 @@ local cpu = lain.widget.cpu({
 })
 
 -- Coretemp
--- local tempicon = wibox.widget.imagebox(theme.widget_temp)
--- local temp = lain.widget.temp({
---     settings = function()
---         widget:set_markup(markup.fontfg(theme.font, "#f1af5f", coretemp_now .. "°C "))
---     end
--- })
+local tempicon = wibox.widget.imagebox(theme.widget_temp)
+local temp = lain.widget.temp({
+    settings = function()
+        widget:set_markup(markup.fontfg(theme.font, "#f1af5f", coretemp_now .. "°C "))
+    end
+})
 
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_batt)
 local bat = lain.widget.bat({
+    batteries = {"BAT0", "BAT1"},
     settings = function()
         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
 
@@ -172,17 +173,17 @@ local bat = lain.widget.bat({
     end
 })
 
--- ALSA volume
--- local volicon = wibox.widget.imagebox(theme.widget_vol)
--- theme.volume = lain.widget.alsa({
---     settings = function()
---         if volume_now.status == "off" then
---             volume_now.level = volume_now.level .. "M"
---         end
+-- Pulseaudio volume
+local volicon = wibox.widget.imagebox(theme.widget_vol)
+theme.volume = lain.widget.alsa({
+    settings = function()
+        if volume_now.status == "off" then
+            volume_now.level = volume_now.level .. "M"
+        end
 
---         widget:set_markup(markup.fontfg(theme.font, "#7493d2", volume_now.level .. "% "))
---     end
--- })
+        widget:set_markup(markup.fontfg(theme.font, "#7493d2", volume_now.level .. "% "))
+    end
+})
 
 -- Net
 local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
@@ -204,32 +205,32 @@ local memory = lain.widget.mem({
 })
 
 -- MPD
-local mpdicon = wibox.widget.imagebox()
-theme.mpd = lain.widget.mpd({
-    settings = function()
-        mpd_notification_preset = {
-            text = string.format("%s [%s] - %s\n%s", mpd_now.artist,
-                   mpd_now.album, mpd_now.date, mpd_now.title)
-        }
+-- local mpdicon = wibox.widget.imagebox()
+-- theme.mpd = lain.widget.mpd({
+--     settings = function()
+--         mpd_notification_preset = {
+--             text = string.format("%s [%s] - %s\n%s", mpd_now.artist,
+--                    mpd_now.album, mpd_now.date, mpd_now.title)
+--         }
 
-        if mpd_now.state == "play" then
-            artist = mpd_now.artist .. " > "
-            title  = mpd_now.title .. " "
-            mpdicon:set_image(theme.widget_note_on)
-        elseif mpd_now.state == "pause" then
-            artist = "mpd "
-            title  = "paused "
-        else
-            artist = ""
-            title  = ""
-            --mpdicon:set_image() -- not working in 4.0
-            mpdicon._private.image = nil
-            mpdicon:emit_signal("widget::redraw_needed")
-            mpdicon:emit_signal("widget::layout_changed")
-        end
-        widget:set_markup(markup.fontfg(theme.font, "#e54c62", artist) .. markup.fontfg(theme.font, "#b2b2b2", title))
-    end
-})
+--         if mpd_now.state == "play" then
+--             artist = mpd_now.artist .. " > "
+--             title  = mpd_now.title .. " "
+--             mpdicon:set_image(theme.widget_note_on)
+--         elseif mpd_now.state == "pause" then
+--             artist = "mpd "
+--             title  = "paused "
+--         else
+--             artist = ""
+--             title  = ""
+--             --mpdicon:set_image() -- not working in 4.0
+--             mpdicon._private.image = nil
+--             mpdicon:emit_signal("widget::redraw_needed")
+--             mpdicon:emit_signal("widget::layout_changed")
+--         end
+--         widget:set_markup(markup.fontfg(theme.font, "#e54c62", artist) .. markup.fontfg(theme.font, "#b2b2b2", title))
+--     end
+-- })
 
 function theme.at_screen_connect(s)
     -- Quake application
@@ -278,11 +279,12 @@ function theme.at_screen_connect(s)
             --s.mylayoutbox,
             s.mytaglist,
             s.mypromptbox,
-            mpdicon,
-            theme.mpd.widget,
+            -- mpdicon,
+            -- theme.mpd.widget,
         },
-        --s.mytasklist, -- Middle widget
+        -- s.mytasklist, -- Middle widget
         nil,
+        -- nil,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
@@ -292,16 +294,16 @@ function theme.at_screen_connect(s)
             netdowninfo,
             netupicon,
             netupinfo.widget,
-            -- volicon,
-            -- theme.volume.widget,
+            volicon,
+            theme.volume.widget,
             memicon,
             memory.widget,
             cpuicon,
             cpu.widget,
             fsicon,
             theme.fs.widget,
-            -- tempicon,
-            -- temp.widget,
+            tempicon,
+            temp.widget,
             baticon,
             bat.widget,
             clockicon,
