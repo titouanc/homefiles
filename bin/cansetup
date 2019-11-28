@@ -1,13 +1,22 @@
 #!/bin/bash
 
+echodo (){
+    echo $*
+    $*
+}
+
 if [[ $# -lt 1 ]]; then
-    echo "USAGE: $(basename $0) <bitrate>"
+    echo "USAGE: $(basename $0) [interface] <bitrate>"
     exit 0
 fi
 
-set -v
+INTERFACE=can0
+if [[ $# -gt 1 ]]; then
+    INTERFACE="$1"
+    shift
+fi
 
-sudo ifconfig can0 down
-sudo ip link set can0 type can bitrate $1
-sudo ifconfig can0 up
+echodo sudo ifconfig $INTERFACE down
+echodo sudo ip link set $INTERFACE type can bitrate $1
+echodo sudo ifconfig $INTERFACE up
 
