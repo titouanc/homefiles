@@ -2,7 +2,7 @@
     ui = true
 [alias]
     co = checkout
-    ci = commit -Ss
+    ci = commit -s
     uci = commit --no-gpg-sign
     st = status
     stu = status -uno
