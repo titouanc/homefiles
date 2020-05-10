@@ -1,0 +1,23 @@
+# Useful to install as python user packages
+
+# Compile frozen list
+pip-compile-multi
+
+# Command line tools and utils libs
+bs4
+ipython
+jsonschema
+pygments
+pytest
+youtube-dl
+
+# Hardware handling
+pyserial
+
+# Data analysis and viz
+jupyter
+matplotlib
+mplleaflet
+numpy
+pandas
+psycopg2-binary
