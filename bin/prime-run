@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Thx https://gist.github.com/abenson/a5264836c4e6bf22c8c8415bb616204a
+
+# Find nvidia userspace libs on Sabayon
+for dir in "/usr/lib/opengl/nvidia/lib" "/usr/lib64/opengl/nvidia/lib"
+do
+    [ -d "$dir" ] && LD_LIBRARY_PATH="$dir:$LD_LIBRARY_PATH"
+done
+export LD_LIBRARY_PATH
+
+export __NV_PRIME_RENDER_OFFLOAD=1
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export __VK_LAYER_NV_optimus=NVIDIA_only
+
+for icd in "/etc/vulkan/icd.d/nvidia_icd.json" "/usr/share/vulkan/icd.d/nvidia_icd.json"
+do
+    if [ -f "$icd" ]; then
+        export VK_ICD_FILENAMES=/etc/vulkan/icd.d/nvidia_icd.json
+        break
+    fi
+done
+
+exec "$@"
