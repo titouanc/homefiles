@@ -11,6 +11,8 @@ pygments
 pytest
 youtube-dl
 git-pw
+aws
+gdbgui
 
 # Hardware handling
 pyserial
