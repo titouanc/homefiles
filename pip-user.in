@@ -16,7 +16,10 @@ pytest
 youtube-dl
 git-pw
 aws
+
+# Zephyr
 west
+pyelftools
 
 # Hardware handling
 pyserial

@@ -216,6 +216,8 @@ pycodestyle==2.6.0
     # via flake8
 pycparser==2.20
     # via cffi
+pyelftools==0.27
+    # via -r pip-user.in
 pyflakes==2.2.0
     # via flake8
 pygments==2.7.4
