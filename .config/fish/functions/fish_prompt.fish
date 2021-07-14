@@ -4,7 +4,13 @@
 #   set -g theme_display_git_untracked no
 
 function _git_branch_name
-  echo (command git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
+  if ! [ git rev-parse 2>/dev/null ]
+    echo -n (command git symbolic-ref HEAD 2>/dev/null | sed -e 's|^refs/heads/||')
+    set -l tag (git describe --tags --exact-match 2>/dev/null)
+    if [ -n "$tag" ]
+      echo (set_color cyan) " [$tag]"
+    end
+  end
 end
 
 function _is_git_dirty
