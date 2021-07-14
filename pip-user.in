@@ -28,7 +28,3 @@ mplleaflet
 numpy
 pandas
 psycopg2-binary
-
-# Pin working version
-# jedi==0.17.2
-jedi
