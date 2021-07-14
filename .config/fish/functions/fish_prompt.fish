@@ -8,7 +8,7 @@ function _git_branch_name
     echo -n (command git symbolic-ref HEAD 2>/dev/null | sed -e 's|^refs/heads/||')
     set -l tag (git describe --tags --exact-match 2>/dev/null)
     if [ -n "$tag" ]
-      echo (set_color cyan) " [$tag]"
+      echo (set_color cyan) "[$tag]"
     end
   end
 end
