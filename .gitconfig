@@ -11,3 +11,7 @@
     up = remote update --prune
 [push]
     default = simple
+[core]
+    pager = less -+FX
+[init]
+	defaultBranch = main
