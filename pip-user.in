@@ -1,7 +1,7 @@
 # Useful to install as python user packages
 
 # Python tools
-pip-compile-multi
+pip-tools
 black
 pytest
 flake8
