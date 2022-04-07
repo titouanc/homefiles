@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Compute 
 hash="$(md5sum < "$1" | cut -d ' ' -f 1)"
 name=$(basename "$1")
@@ -8,5 +10,6 @@ extension="${name#*.}"
 name="$hash.$extension"
 url="https://mypi.cz/$name"
 
-scp -q "$1" picz@ititou.be:$name && echo $url && echo -n $url | xclip
-
+rsync --chmod=0644 -q "$1" picz@ititou.be:$name
+echo -n $url | xclip
+echo $url
